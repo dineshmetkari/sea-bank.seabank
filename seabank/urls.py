@@ -7,6 +7,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 	url(r'^$', RedirectView.as_view(url='ebanking/')),
-    url(r'^ebanking/', include('ebanking.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+	url(r'^ebanking/', include('ebanking.urls')),
+	url(r'^admin/', include(admin.site.urls)),
 )
