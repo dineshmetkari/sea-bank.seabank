@@ -8,5 +8,5 @@ urlpatterns = patterns('',
 	url(r'^login/$', 'ebanking.views.login',name='login'),
 	url(r'^logout/$', 'ebanking.views.logout',name='loguot'),
 	url(r'^logout/success.html$', TemplateView.as_view(template_name='ebanking/logout_success.html'),name='logout_success'),    
-	url(r'^index.html$', login_required(TemplateView.as_view(template_name='ebanking/index.html'))),
+	url(r'^index.html$', login_required(TemplateView.as_view(template_name='ebanking/index.html'),redirect_field_name='')),
 )

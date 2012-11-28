@@ -1,15 +1,22 @@
-<h1>login</h1>
+<center>
+<h1>Logowanie do systemu</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
 <form action="" method="post">
 {% csrf_token %}
-
-<label for="username">Username:</label>
-<input type="text" name="username" id="username" value="{{ username }}" />
-
-<label for="password">Password:</label>
-<input type="password" name="password" id="password" />
-
-<input type="submit" value="Login" />
+<table>
+	<tr>
+		<td><label for="username">Identyfikator:</label></td>
+		<td><input type="text" name="username" id="username" value="{{ username }}" /></td>
+	</tr>
+	<tr>
+		<td><label for="password">Hasło:</label></td>
+		<td><input type="password" name="password" id="password" /></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td><input type="submit" value="Zaloguj" /></td>
+	<tr>
+</table>
 </form>
+</center>
