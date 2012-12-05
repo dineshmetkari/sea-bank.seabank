@@ -20,6 +20,17 @@ DATABASES = {
     }
 }
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': 'my_9646', # Or path to database file if using sqlite3.
+#        'USER': 'my_9646a',                      # Not used with sqlite3.
+#        'PASSWORD': 'Xu1mSQZYSAmY',                  # Not used with sqlite3.
+#        'HOST': 'pjasiun.megiteam.pl',                      # Set to empty string for localhost. Not used with sqlite3.
+#        'PORT': '3307',                      # Set to empty string for default. Not used with sqlite3.
+#    }
+#}
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.

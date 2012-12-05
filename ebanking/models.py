@@ -22,13 +22,15 @@ class Account(models.Model):
 	iban = models.CharField("IBAN", max_length=200)
 	currency = models.CharField("waluta", max_length=3)
 
-class Transactions(models.Model):
+class Transaction(models.Model):
 	class Meta:
 		verbose_name = "Operacja"
 		verbose_name_plural = "Operacje"
-	account = models.ForeignKey(Account)
-	description = models.CharField("opis", max_length=200)
+	sender_account = models.ForeignKey(Account)
+	recipient_account = models.CharField("rachunek odbiorcy", max_length=200)
+	title = models.CharField("tytul przelewu", max_length=200)
+	recipient_name = models.CharField("nazwa odbiorcy", max_length=200)
 	date = models.DateField("data operacji")
 	value = models.IntegerField("kwota operacji")
-	smscode = models.CharField("kod sms", max_length=10)
+	sms_code = models.CharField("kod sms", max_length=10)
 	confirmed = models.BooleanField("potwierdzony")

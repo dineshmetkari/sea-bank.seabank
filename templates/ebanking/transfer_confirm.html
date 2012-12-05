@@ -1,0 +1,39 @@
+<center>
+<p> sending sms code: {{transaction.sms_code}}</p>
+<h1>Nowy przelew</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<form action="process.html" method="post">
+{% csrf_token %}
+<input type="hidden" name="transaction" value="{{ transaction.pk }}" /></td>
+<table>
+	<tr>
+		<td>Rchunek odbiorcy:</td>
+		<td>{{ transaction.recipient_account }}</td>
+	</tr>
+	<tr>
+		<td>Tytuł:</td>
+		<td>{{ transaction.title }}</td>
+	</tr>
+	<tr>
+		<td>Nazwa odbiorcy:</td>
+		<td>{{ transaction.recipient_name }}</td>
+	</tr>
+	<tr>
+		<td>Date operacji:</td>
+		<td>{{ transaction.date }}</td>
+	</tr>
+	<tr>
+		<td>Kwota operacji:</td>
+		<td>{{ transaction.value }}</td>
+	</tr>
+	<tr>
+		<td><label for="sms_code">Kod sms:</label></td>
+		<td><input type="text" name="sms_code" id="sms_code"/></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td><td><input type="submit" value="Zatwierdź" /></td>
+	<tr>
+</table>
+</form>
+</center>

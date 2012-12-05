@@ -1,2 +1,12 @@
 <h1>Witaj, Twój nr telefonu:  {{ user.get_profile.telephone_number }}</h1>
 <a href=logout/>Wyloguj</a>
+{% for account in user.account_set.all %}
+<div>
+	<hr />
+	<p>{{ account.user.username }}</p>
+	<p>{{ account.iban }}</p>
+	<p>{{ account.currency }}</p>
+	<p><a href="{{ account.id }}/transfer/form.html">Wykonaj przelew</a></p>
+	<p><a href="{{ account.id }}/history/">Historia rachunku</a></p>
+</div>
+{% endfor %}
