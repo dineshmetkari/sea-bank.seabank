@@ -1,3 +1,5 @@
+import os
+PROJECT_PATH = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 # Django settings for seabank project.
 
 ADMINS = (
@@ -93,7 +95,7 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    'D:/workspace/django/seabank/templates',
+    os.path.join(PROJECT_PATH, 'templates')
 )
 
 INSTALLED_APPS = (

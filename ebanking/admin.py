@@ -1,8 +1,9 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
-from ebanking.models import UserProfile, Account, Transaction
+from ebanking.models import UserProfile, Account, Transaction, Property
 
 # Define an inline admin descriptor for UserProfile model
 # which acts a bit like a singleton
@@ -23,4 +24,7 @@ class UserAdmin(UserAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 
+admin.site.unregister(Site)
+
 admin.site.register(Transaction)
+admin.site.register(Property)

@@ -1,0 +1,26 @@
+[
+  {
+    "model": "ebanking.property",
+    "pk": 1,
+    "fields": {
+      "name": "SMS_LOGIN",
+      "value": ""
+    }
+  },
+  {
+    "model": "ebanking.property",
+    "pk": 2,
+    "fields": {
+      "name": "SMS_PASSWORD",
+      "value": ""
+    }
+  },
+  {
+    "model": "ebanking.property",
+    "pk": 3,
+    "fields": {
+      "name": "SMS_API_ID",
+      "value": ""
+    }
+  }
+]
