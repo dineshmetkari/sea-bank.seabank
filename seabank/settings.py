@@ -1,35 +1,10 @@
 # Django settings for seabank project.
 
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'D:/workspace/django/sqllite/seabank.db', # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-#        'NAME': 'my_9646', # Or path to database file if using sqlite3.
-#        'USER': 'my_9646a',                      # Not used with sqlite3.
-#        'PASSWORD': 'Xu1mSQZYSAmY',                  # Not used with sqlite3.
-#        'HOST': 'pjasiun.megiteam.pl',                      # Set to empty string for localhost. Not used with sqlite3.
-#        'PORT': '3307',                      # Set to empty string for default. Not used with sqlite3.
-#    }
-#}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -166,3 +141,5 @@ LOGGING = {
         },
     }
 }
+
+from settings_local import *
