@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect, Http404
 
 from ebanking.models import *
 from ebanking.forms import *
+from ebanking.sms import Sms
+from ebanking.utils import random_string
 
 def login(request):
     if request.method != 'POST':
@@ -61,7 +63,11 @@ def transfer_confirm(request, account_id):
     t.recipient_name = request.POST['recipient_name']
     t.date = request.POST['date']
     t.value = request.POST['value']
-    t.sms_code = "CODE4U"
+    t.sms_code = random_string(4)
+
+    sms = Sms(request.user.get_profile().telephone_number, t.sms_code)
+    sms.send()
+
     a = Account.objects.get(pk=account_id)
     a.transaction_set.add(t);
     a.save();
