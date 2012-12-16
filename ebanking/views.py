@@ -1,3 +1,5 @@
+import datetime
+
 from django.core.urlresolvers import reverse
 from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.shortcuts import render, render_to_response, get_list_or_404
@@ -65,7 +67,9 @@ def transfer_confirm(request, account_id):
     t.value = request.POST['value']
     t.sms_code = random_string(4)
 
-    sms = Sms(request.user.get_profile().telephone_number, t.sms_code)
+    now = datetime.datetime.now()
+    smsMessage = "Kod dla operacji z dnia "+now.strftime("%d/%m/%Y")+", godziny "+now.strftime("%H:%M")+": " + t.sms_code
+    sms = Sms(request.user.get_profile().telephone_number, smsMessage)
     sms.send()
 
     a = Account.objects.get(pk=account_id)
