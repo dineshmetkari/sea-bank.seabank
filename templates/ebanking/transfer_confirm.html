@@ -1,3 +1,5 @@
+{% extends "ebanking\base.html" %}
+{% block content %}
 <center>
 <p> sending sms code: {{transaction.sms_code}}</p>
 <h1>Nowy przelew</h1>
@@ -37,3 +39,4 @@
 </table>
 </form>
 </center>
+{% endblock %}

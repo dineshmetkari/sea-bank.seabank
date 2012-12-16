@@ -1,3 +1,5 @@
+{% extends "ebanking\base.html" %}
+{% block content %}
 <h1>Witaj, Twój nr telefonu:  {{ user.get_profile.telephone_number }}</h1>
 <a href=logout/>Wyloguj</a>
 {% for account in user.account_set.all %}
@@ -10,3 +12,4 @@
 	<p><a href="{{ account.id }}/history/">Historia rachunku</a></p>
 </div>
 {% endfor %}
+{% endblock %}
