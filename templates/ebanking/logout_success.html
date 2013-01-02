@@ -1,5 +1,6 @@
 {% extends "ebanking/base.html" %}
+{% block logout %}{% endblock %}
+{% block header %}Poprawne wylogowanie z systemu{% endblock %}
 {% block content %}
-<h1>Poprawne wylogowanie z systemu.</h1>
-<a href={% url login %}>Zaloguj się ponownie</a>
+<p><a href={% url login %}>Zaloguj się ponownie</a></p>
 {% endblock %}

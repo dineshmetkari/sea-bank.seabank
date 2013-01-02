@@ -1,6 +1,6 @@
 {% extends "ebanking/base.html" %}
+{% block header %}Historia{% endblock %}
 {% block content %}
-<h1>Historia</h1>
 <p><a href="{% url index %}">Powrót do strony głównej</a></p>
 {% for transaction in transactions %}
 <div>

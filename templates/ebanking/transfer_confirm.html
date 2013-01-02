@@ -1,36 +1,25 @@
 {% extends "ebanking/base.html" %}
+{% block header %}Nowy przelew{% endblock %}
 {% block content %}
-<center>
-<h1>Nowy przelew</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action="process.html" method="post">
 {% csrf_token %}
 <input type="hidden" name="transaction" value="{{ transaction.pk }}" /></td>
 <table>
-	<tr>
-		<td>Rchunek odbiorcy:</td>
-		<td>{{ transaction.recipient_account }}</td>
-	</tr>
-	<tr>
-		<td>Tytuł:</td>
-		<td>{{ transaction.title }}</td>
-	</tr>
-	<tr>
-		<td>Nazwa odbiorcy:</td>
-		<td>{{ transaction.recipient_name }}</td>
-	</tr>
-	<tr>
-		<td>Date operacji:</td>
-		<td>{{ transaction.date }}</td>
-	</tr>
-	<tr>
-		<td>Kwota operacji:</td>
-		<td>{{ transaction.value }}</td>
-	</tr>
-	<tr>
-		<td><label for="sms_code">Kod sms:</label></td>
-		<td><input type="text" name="sms_code" id="sms_code"/></td>
+	
+		<label>Rchunek odbiorcy:</label>
+		<p class=value>{{ transaction.recipient_account }}</p>
+		<label>Tytuł:</label>
+		<p class=value>{{ transaction.title }}</p>
+		<label>Nazwa odbiorcy:</label>
+		<p class=value>{{ transaction.recipient_name }}</p>
+		<label>Date operacji:</label>
+		<p class=value>{{ transaction.date }}</p>
+		<label>Kwota operacji:</label>
+		<p class=value>{{ transaction.value }}</p>
+		<label for="sms_code">Kod sms:</label>
+		<input type="text" name="sms_code" id="sms_code"/>
 	</tr>
 	<tr>
 		<td>&nbsp;</td><td><input type="submit" value="Zatwierdź" /></td>

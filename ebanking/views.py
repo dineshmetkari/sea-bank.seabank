@@ -38,7 +38,7 @@ def history(request, account_id):
     t = list(a.transaction_set.filter(confirmed=True))
     #if not t:
     #    raise Http404
-    return render_to_response('ebanking/history.html', {'transactions': t})
+    return render(request,'ebanking/history.html', {'transactions': t})
 
 
 @login_required

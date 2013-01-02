@@ -1,7 +1,6 @@
 {% extends "ebanking/base.html" %}
+{% block header %}Nowy przelew{% endblock %}
 {% block content %}
-<center>
-<h1>Nowy przelew</h1>
 
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -9,9 +8,8 @@
 <table>
 {% csrf_token %}
 <input type="hidden" name="sender_account" value="{{ account_id }}" /></td>
-{{ form.as_table }}
+{{ form.as_p }}
 </table>
-<input type="submit" value="Submit" />
+<input class="submit" type="submit" value="Submit" />
 </form>
-</center>
 {% endblock %}

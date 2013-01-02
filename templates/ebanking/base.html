@@ -14,7 +14,7 @@
 	</div>
 	<div id="sub-header">		
 		<h2>{% block header %}{% endblock %}</h2>
-		{% block logout %}<p class="logout"><a href="logout/">Wyloguj</a></p>{% endblock %}
+		{% block logout %}<p class="logout"><a href="{% url logout %}">Wyloguj</a></p>{% endblock %}
 	</div>
     <div id="content">
         {% block content %}{% endblock %}
