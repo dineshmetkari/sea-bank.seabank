@@ -1,24 +1,14 @@
 {% extends "ebanking/base.html" %}
+{% block logout %}{% endblock %}
+{% block header %}Logowanie do systemu{% endblock %}
 {% block content %}
-<center>
-<h1>Logowanie do systemu</h1>
-
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action="" method="post">
 {% csrf_token %}
-<table>
-	<tr>
-		<td><label for="username">Identyfikator:</label></td>
-		<td><input type="text" name="username" id="username" value="{{ username }}" /></td>
-	</tr>
-	<tr>
-		<td><label for="password">Hasło:</label></td>
-		<td><input type="password" name="password" id="password" /></td>
-	</tr>
-	<tr>
-		<td>&nbsp;</td><td><input type="submit" value="Zaloguj" /></td>
-	<tr>
-</table>
+<label>Identyfikator:</label>
+<input type="text" name="username" id="username" value="{{ username }}" />
+<label>Hasło:</label>
+<input type="password" name="password" id="password" />
+<input class="submit" type="submit" value="Zaloguj" />
 </form>
-</center>
 {% endblock %}
