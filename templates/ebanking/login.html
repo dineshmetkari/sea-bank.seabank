@@ -3,7 +3,7 @@
 {% block header %}Logowanie do systemu{% endblock %}
 {% block content %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<form action="" method="post">
+<form action="" method="post" class="login">
 {% csrf_token %}
 <label>Identyfikator:</label>
 <input type="text" name="username" id="username" value="{{ username }}" />
