@@ -45,3 +45,6 @@ class Transaction(models.Model):
     value = models.IntegerField("kwota operacji")
     sms_code = models.CharField("kod sms", max_length=10)
     confirmed = models.BooleanField("potwierdzony")
+
+    def __unicode__(self):
+        return "" + str(self.value) + " (" + str(self.date) + ")"
