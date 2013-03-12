@@ -41,7 +41,7 @@ class Transaction(models.Model):
     recipient_account = models.CharField("rachunek odbiorcy", max_length=30)
     title = models.CharField("tytul przelewu", max_length=200)
     recipient_name = models.CharField("nazwa odbiorcy", max_length=40)
-    date = models.DateField("data operacji")
+    date = models.DateField("data operacji (RRRR-MM-DD)")
     value = models.IntegerField("kwota operacji")
     sms_code = models.CharField("kod sms", max_length=10)
     confirmed = models.BooleanField("potwierdzony")

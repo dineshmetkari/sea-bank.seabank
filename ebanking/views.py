@@ -44,17 +44,13 @@ def index(request):
             a.sum = 25000 - a.transactions.get("value__sum")
         else:
             a.sum = 25000
-    #if not t:
-    #    raise Http404
     return render(request,'ebanking/index.html', {'accounts': accounts})
 
 
 @login_required
 def history(request, account_id):
     a = Account.objects.get(pk=account_id)
-    t = list(a.transaction_set.filter(confirmed=True))
-    #if not t:
-    #    raise Http404
+    t = list(a.transaction_set.filter(confirmed=True).order_by('-pk'))
     return render(request,'ebanking/history.html', {'transactions': t})
 
 
@@ -64,44 +60,50 @@ def transfer_form(request, account_id):
     if request.method == 'POST':
         form = TransactionForm(request.POST)
         if form.is_valid():
-            # ...
-            return HttpResponseRedirect('transfer_confirm')
+            t = Transaction();
+            t.sender_account = Account.objects.get(pk=account_id)
+            t.recipient_account = request.POST['recipient_account']
+            t.title = request.POST['title']
+            t.recipient_name = request.POST['recipient_name']
+            t.date = request.POST['date']
+            t.value = request.POST['value']
+            t.sms_code = random_string(4)
+
+            request.session['transaction'] = t
+            return HttpResponseRedirect('confirm.html')
     else:
         form = TransactionForm()
-        return render(request, 'ebanking/transfer_form.html', {
-            'form': form,
-            'account_id': account_id
-        })
+
+    return render(request, 'ebanking/transfer_form.html', {
+        'form': form,
+        'account_id': account_id
+    })
 
 
 @login_required
 def transfer_confirm(request, account_id):
-    t = Transaction();
-    t.recipient_account = request.POST['recipient_account']
-    t.title = request.POST['title']
-    t.recipient_name = request.POST['recipient_name']
-    t.date = request.POST['date']
-    t.value = request.POST['value']
-    t.sms_code = random_string(4)
 
-    now = datetime.datetime.now()
-    smsMessage = "Kod dla operacji z dnia "+now.strftime("%d/%m/%Y")+", godziny "+now.strftime("%H:%M")+": " + t.sms_code
-    sms = Sms(request.user.get_profile().telephone_number, smsMessage)
-    sms.send()
+    t = request.session['transaction']
 
-    a = Account.objects.get(pk=account_id)
-    a.transaction_set.add(t);
-    a.save();
-    t.save();
+    if request.method == 'POST':
+        if not t.sms_code == request.POST['sms_code']:
+            return render_to_response('ebanking/transfer_confirm.html', 
+                {'account_id': account_id, 'transaction': t, 'error_message': 'Kod SMS jest niepoprawny!'},
+                 context_instance=RequestContext(request))
+
+        t.confirmed = True
+        t.save()
+        return HttpResponseRedirect('success.html')
+    else:
+        now = datetime.datetime.now()
+        smsMessage = "Kod dla operacji z dnia "+now.strftime("%d/%m/%Y")+", godziny "+now.strftime("%H:%M")+": " + t.sms_code
+        sms = Sms(request.user.get_profile().telephone_number, smsMessage)
+        sms.send()
+
+        a = Account.objects.get(pk=account_id)
+        a.transaction_set.add(t);
+        a.save();
+        t.save();
+
     return render_to_response('ebanking/transfer_confirm.html', 
         {'account_id': account_id, 'transaction': t}, context_instance=RequestContext(request))
-
-@login_required
-def transfer_process(request, account_id):
-    t = Transaction.objects.get(pk=request.POST['transaction'])
-    if not t.sms_code == request.POST['sms_code']:
-        raise Http404
-
-    t.confirmed = True
-    t.save()
-    return HttpResponseRedirect('success.html')
