@@ -5,7 +5,16 @@
 {% for transaction in transactions %}
 <div>
 	<hr />
-	<p>{{ transaction.title }}</p>
+	<p><b>Tytył przelewu:</b> {{ transaction.title }}</p>
+	<p><b>Nadawca:</b></p>
+	<p>{{ transaction.sender_account.user.first_name }} {{ transaction.sender_account.user.last_name }}</p>
+	<p>{{ transaction.sender_account.iban }}</p>
+	<p><b>Odbiorca:</b></p>
+	<p>{{ transaction.recipient_name }}</p>
+	<p>{{ transaction.recipient_account }}</p>
+	<p><b>Data: </b>{{ transaction.date }}</p>
+	<p><b>Kwota: </b>{{ transaction.value }} {{ transaction.sender_account.currency }}</p>
+
 </div>
 {% endfor %}
 {% endblock %}

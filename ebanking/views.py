@@ -6,11 +6,14 @@ from django.shortcuts import render, render_to_response, get_list_or_404
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from django.http import HttpResponseRedirect, Http404
+from django.db.models import Sum
 
 from ebanking.models import *
 from ebanking.forms import *
 from ebanking.sms import Sms
 from ebanking.utils import random_string
+
+
 
 def login(request):
     if request.method != 'POST':
@@ -31,6 +34,20 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return HttpResponseRedirect(reverse('logout_success'))
+
+@login_required
+def index(request):
+    accounts = Account.objects.filter(user__username=request.user)
+    for a in accounts:
+        a.transactions = a.transaction_set.filter(confirmed=True).aggregate(Sum('value'))
+        if a.transactions.get("value__sum") is not None:
+            a.sum = 25000 - a.transactions.get("value__sum")
+        else:
+            a.sum = 25000
+    #if not t:
+    #    raise Http404
+    return render(request,'ebanking/index.html', {'accounts': accounts})
+
 
 @login_required
 def history(request, account_id):

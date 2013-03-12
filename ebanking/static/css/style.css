@@ -65,12 +65,24 @@ a:hover {
 	color: #9d6006;
 }
 
+p {
+
+}
+
 #content {
 	padding: 10px 10px;
 }
 
 h1, h2, p, td, li, label, input {
 	font-family: 'Open Sans', sans-serif;
+}
+
+p {
+	font-size: 14px;
+}
+p.link {
+	width: 100%;
+	text-align: right;
 }
 
 input {

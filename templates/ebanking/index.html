@@ -1,14 +1,13 @@
 {% extends "ebanking/base.html" %}
 {% block header %}Rachunki{% endblock %}
 {% block content %}
-{% for account in user.account_set.all %}
+{% for account in accounts %}
 <div>
+	<p><b>{{ account.iban }}</b></p>
+	<p>Stan rachunku: {{ account.sum }} {{ account.currency }}</p>
+	<p class="link"><a href="{{ account.id }}/transfer/form.html">Wykonaj przelew</a></p>
+	<p class="link"><a href="{{ account.id }}/history.html">Historia rachunku</a></p>
 	<hr />
-	<p>{{ account.user.username }}</p>
-	<p>{{ account.iban }}</p>
-	<p>{{ account.currency }}</p>
-	<p><a href="{{ account.id }}/transfer/form.html">Wykonaj przelew</a></p>
-	<p><a href="{{ account.id }}/history.html">Historia rachunku</a></p>
 </div>
 {% endfor %}
 {% endblock %}
